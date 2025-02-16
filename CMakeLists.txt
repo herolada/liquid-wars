@@ -12,6 +12,21 @@ FetchContent_Declare(SFML
     SYSTEM)
 FetchContent_MakeAvailable(SFML)
 
-add_executable(main src/main.cpp src/nation.cpp)   # here add other cpp files
+add_executable(main src/main.cpp src/nation.cpp src/game.cpp)   # here add other cpp files
 target_compile_features(main PRIVATE cxx_std_17)
 target_link_libraries(main PRIVATE SFML::Graphics)
+
+
+
+
+FetchContent_Declare(
+  Catch2
+  GIT_REPOSITORY https://github.com/catchorg/Catch2.git
+  GIT_TAG        v3.4.0 # or a later release
+)
+
+FetchContent_MakeAvailable(Catch2)
+
+add_executable(tests src/test.cpp src/nation.cpp src/game.cpp)
+target_link_libraries(tests PRIVATE SFML::Graphics)
+target_link_libraries(tests PRIVATE Catch2::Catch2WithMain)

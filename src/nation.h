@@ -6,11 +6,6 @@
 #include <SFML/Graphics.hpp>
 #include <random>
 
-/* struct Position {
-    int x;
-    int y;
-}; */
-
 class Nation
 {
 private:
@@ -18,7 +13,7 @@ private:
     std::vector<sf::Vector2f> units;
 
     std::mt19937 rng;
-    std::uniform_int_distribution<int> randint;
+    std::uniform_real_distribution<float> rand;
 
 public:
     Nation();
