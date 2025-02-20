@@ -4,8 +4,14 @@
 #include "game.h"
 #include <iostream>
 #include <chrono>
+#include <string>
 
 #define NUM_UNITS 2000
+
+void print_status(size_t units_a, size_t units_b) {
+    std::cout << "\r" << std::string(50, ' ') << "\r"; // Clears the line
+    std::cout << "UNITS: " << units_a << " / " << units_b << std::flush;
+}
 
 int main()
 {
@@ -37,7 +43,7 @@ int main()
 
     std::vector<sf::Vertex> units_m;
 
-    for (int i=0; i< nation_a.get_units().size() + nation_b.get_units().size(); i++) {
+    for (int i=0; i< nation_a.units.size() + nation_b.units.size(); i++) {
         sf::Vertex unit_m;
         units_m.push_back(unit_m);
     }
@@ -52,7 +58,9 @@ int main()
             }
         }
 
-        game.step();
+        game.step(nation_b.get_centre(), nation_a.get_centre());
+
+        print_status(nation_a.units.size(), nation_b.units.size());
 
         window.clear();
 
@@ -61,8 +69,8 @@ int main()
 
         auto start = std::chrono::high_resolution_clock::now();
 
-        std::vector<sf::Vector2f> units_a = nation_a.get_units();
-        std::vector<sf::Vector2f> units_b = nation_b.get_units();
+        std::vector<sf::Vector2f> units_a = nation_a.units;
+        std::vector<sf::Vector2f> units_b = nation_b.units;
 
         for (int i=0; i<units_a.size(); i++) {
             units_m[i].color = color_a;
@@ -78,7 +86,6 @@ int main()
 
         auto stop = std::chrono::high_resolution_clock::now();
         auto duration = std::chrono::duration_cast<std::chrono::microseconds>(stop - start);
-        std::cout << duration.count() << std::endl;
 
         window.display();
     }

@@ -10,18 +10,21 @@ class Nation
 {
 private:
     sf::Vector2f base;
-    std::vector<sf::Vector2f> units;
-
     std::mt19937 rng;
     std::uniform_real_distribution<float> rand;
 
 public:
+    std::vector<sf::Vector2f> units;
+
     Nation();
+    Nation(std::vector<sf::Vector2f> units);
     Nation(sf::Vector2f base, int num_units);
     void step(sf::Vector2f enemy_base);
     void create_unit();
     sf::Vector2f get_base();
-    std::vector<sf::Vector2f> get_units();
+    //std::vector<sf::Vector2f> get_units();
+    sf::Vector2f get_centre();
+    void sort_units();
 };
 
 #endif

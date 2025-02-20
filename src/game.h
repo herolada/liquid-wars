@@ -16,7 +16,9 @@ private:
 public:
     Game(Nation* nation_a, Nation* nation_b);
     int check_win();
-    void step();
+    void step(sf::Vector2f target_a, sf::Vector2f target_b);
+    void nation_step(Nation* nation_a, Nation* nation_b, sf::Vector2f target);
+    void overtake(std::vector<sf::Vector2f>& units_a, std::vector<sf::Vector2f>& units_b);
 };
 
 #endif
